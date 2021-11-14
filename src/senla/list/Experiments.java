@@ -1,13 +1,28 @@
 package senla.list;
 
+import java.util.Arrays;
+
 public class Experiments {
 
     public static void main(String[] args) {
-        int num = 1954700000;
-        System.out.println(Integer.toBinaryString(num));
-        num = num >> 1;
-        System.out.println(Integer.toBinaryString(num));
-        System.out.println(num);
-        System.out.println(num  + 1334700000);
+        checkArrayList();
+    }
+
+    private static void checkArrayList() {
+        MyList<String> fooList = new MyArrayList<>();
+        for (int i = 0; i < 100; i ++){
+            fooList.add("foo" + i);
+        }
+        MyList<String> barList = new MyArrayList<>();
+        for (int i = 0; i < 20; i ++){
+            barList.add("bar" + i);
+        }
+        fooList.addAll(barList);
+        System.out.println(Arrays.toString(fooList.toArray()));
+        barList.remove("bar13");
+        barList.remove("bar16");
+        System.out.println(barList.size());
+        barList.forEach(System.out::println);
+        System.out.println(Arrays.toString(barList.toArray()));
     }
 }

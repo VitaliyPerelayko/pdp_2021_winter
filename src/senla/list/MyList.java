@@ -5,15 +5,15 @@ import java.util.List;
 
 public interface MyList<T> extends Iterable<T> {
 
-    public int size();
+    int size();
 
-    public void add(T element);
-
-    boolean isEmpty();
+    void add(T element);
 
     boolean contains(T element);
 
     boolean remove(T element);
 
-    boolean addAll(MyList<T> list);
+    void addAll(MyList<T> list);
+
+    T[] toArray();
 }

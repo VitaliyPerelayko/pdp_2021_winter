@@ -22,20 +22,27 @@ public class MyArrayList<T> implements MyList<T>{
     }
 
     @Override
+    public T[] toArray() {
+        return (T[]) elements;
+    }
+
+    @Override
     public int size() {
         return size;
     }
 
     @Override
     public void add(T element) {
-        checkCapacity(1);
+        if (capacity == size) grow(size + 1);
         elements[size] = element;
         size++;
     }
 
     @Override
-    public boolean isEmpty() {
-        return size == 0;
+    public void addAll(MyList<T> list) {
+        if (list.size() + size >= capacity) grow(size + list.size());
+        System.arraycopy(list.toArray(), 0, elements, size, list.size());
+        size += list.size();
     }
 
     @Override
@@ -67,50 +74,45 @@ public class MyArrayList<T> implements MyList<T>{
 
     @Override
     public boolean remove(T element) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(MyList<T> list) {
-        return false;
+        int index = this.indexOf(element);
+        if (index == -1) return false;
+        System.arraycopy(elements, index + 1, elements, index, size - index);
+        size--;
+        return true;
     }
 
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
+            private int counter;
             @Override
             public boolean hasNext() {
-                return false;
+                return counter < size;
             }
 
             @Override
             public T next() {
-                return null;
+                return (T) elements[counter++];
             }
         };
     }
 
-    private Object[] grow(int minCapacity) {
-        return elements = Arrays.copyOf(elements,
-                newCapacity(minCapacity));
-    }
-
-    private boolean checkCapacity(int amountElementsToAdd){
-        if (size + amountElementsToAdd < 0) throw new RuntimeException("Max capacity wos reached");
-        return (size + amountElementsToAdd) < capacity;
+    private void grow(int minCapacity) {
+        System.out.println(newCapacity(minCapacity));
+        newCapacity(minCapacity);
+        Object[] newArray = new Object[capacity];
+        System.arraycopy(elements, 0, newArray, 0, size);
+        elements = newArray;
     }
 
     private int newCapacity(int minCapacity) {
-        // overflow-conscious code
+        if (minCapacity < 0 || size == Integer.MAX_VALUE) throw new OutOfMemoryError();
         int oldCapacity = size;
         int newCapacity = oldCapacity + (oldCapacity >> 1);
-        if (newCapacity - minCapacity <= 0) {
-            if (minCapacity < 0) // overflow
-                throw new OutOfMemoryError();
-            return minCapacity;
-        }
-        return (newCapacity - MAX_ARRAY_SIZE <= 0)
+        if (newCapacity < 0) newCapacity = Integer.MAX_VALUE;
+        capacity = (newCapacity >= minCapacity)
                 ? newCapacity
-                : hugeCapacity(minCapacity);
+                : newCapacity(minCapacity);
+        return capacity;
     }
 }
