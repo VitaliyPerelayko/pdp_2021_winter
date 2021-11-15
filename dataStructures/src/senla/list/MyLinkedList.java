@@ -1,7 +1,6 @@
 package senla.list;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 
 public class MyLinkedList<T> implements MyList<T> {
 

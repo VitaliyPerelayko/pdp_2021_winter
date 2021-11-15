@@ -1,8 +1,5 @@
 package senla.list;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 public class MyArrayQueue<E> implements MyQueue<E> {
 
     private MyArrayList<E> myList;
