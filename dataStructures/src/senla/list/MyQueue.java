@@ -1,18 +1,12 @@
 package senla.list;
 
-import java.util.Queue;
+import java.util.Optional;
 
-public interface MyQueue<E> {
+public interface MyQueue<E> extends Iterable<E> {
 
-    boolean add(E var1);
-
-    boolean offer(E var1);
-
-    E remove();
+    void add(E var1);
 
     E poll();
 
-    E element();
-
-    E peek();
+    Optional<E> peek();
 }

@@ -12,5 +12,7 @@ public interface MyList<T> extends Iterable<T> {
 
     void addAll(MyList<T> list);
 
+    T get(int index);
+
     T[] toArray();
 }
