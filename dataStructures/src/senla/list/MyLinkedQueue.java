@@ -51,6 +51,7 @@ public class MyLinkedQueue<E> implements MyQueue<E> {
             Node<E> currentNode;
             @Override
             public boolean hasNext() {
+                if (first == null) return false;
                 if (currentNode == null) return true;
                 return currentNode.next != null;
             }

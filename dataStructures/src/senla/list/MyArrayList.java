@@ -106,7 +106,6 @@ public class MyArrayList<T> implements MyList<T>{
     }
 
     private void grow(int minCapacity) {
-        System.out.println(newCapacity(minCapacity));
         newCapacity(minCapacity);
         Object[] newArray = new Object[capacity];
         System.arraycopy(elements, 0, newArray, 0, size);

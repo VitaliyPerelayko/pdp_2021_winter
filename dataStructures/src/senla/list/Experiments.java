@@ -1,17 +1,15 @@
 package senla.list;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Stack;
+import java.util.*;
 
 public class Experiments {
 
     public static void main(String[] args) {
 //        checkArrayList();
-
-        checkLinkedList();
+//        checkLinkedList();
 //        checkLinkedQueue();
 //        checkArrayStack();
+        checkHashTable();
     }
 
     private static void checkArrayList() {
@@ -89,6 +87,26 @@ public class Experiments {
         fishStack.forEach(System.out::println);
     }
 
+    private static void checkHashTable() {
+        HashTable<String, Fish> fishTable = new HashTable<>();
+        fishTable.put("GoldFish", new Fish("GoldFish", 3));
+        fishTable.put("RedFish", new Fish("RedFish", 4));
+        fishTable.put("BlackFish", new Fish("BlackFish", 5));
+        fishTable.printTable();
+        for (int i = 0; i < 30; i ++){
+            fishTable.put("type" + i, new Fish("type" + i, i));
+        }
+        System.out.println(fishTable.size());
+        fishTable.printTable();
+        System.out.println(fishTable.get("RedFish"));
+        fishTable.remove("BlackFish");
+        fishTable.remove("type5");
+        fishTable.remove("type9");
+        System.out.println(fishTable.size());
+        System.out.println(fishTable.get("BlackFish"));
+        fishTable.printTable();
+    }
+
     static class Fish {
         String type;
         int cost;
@@ -104,6 +122,20 @@ public class Experiments {
                     "type=" + type +
                     ", cost=" + cost +
                     '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Fish fish = (Fish) o;
+            return cost == fish.cost &&
+                    type.equals(fish.type);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(type, cost);
         }
     }
 }

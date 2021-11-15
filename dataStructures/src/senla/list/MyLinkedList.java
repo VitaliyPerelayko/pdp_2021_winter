@@ -43,7 +43,7 @@ public class MyLinkedList<T> implements MyList<T> {
     @Override
     public boolean remove(T element) {
         Optional<Node<T>> findRes = findNode(element);
-        if (findRes.isEmpty()) return false;
+        if (!findRes.isPresent()) return false;
         Node<T> nodeToRemove = findRes.get();
         unlink(nodeToRemove);
         return true;
@@ -71,6 +71,7 @@ public class MyLinkedList<T> implements MyList<T> {
             Node<T> currentNode;
             @Override
             public boolean hasNext() {
+                if (first == null) return false;
                 if (currentNode == null) return true;
                 return currentNode.next != null;
             }
