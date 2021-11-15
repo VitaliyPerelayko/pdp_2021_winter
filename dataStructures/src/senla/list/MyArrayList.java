@@ -20,6 +20,11 @@ public class MyArrayList<T> implements MyList<T>{
     }
 
     @Override
+    public T get(int index){
+        return (T) elements[index];
+    }
+
+    @Override
     public T[] toArray() {
         return (T[]) elements;
     }
@@ -44,15 +49,15 @@ public class MyArrayList<T> implements MyList<T>{
     }
 
     @Override
-    public boolean contains(Object o) {
+    public boolean contains(T o) {
         return indexOf(o) >= 0;
     }
 
-    public int indexOf(Object o) {
+    public int indexOf(T o) {
         return indexOfRange(o, 0, size);
     }
 
-    int indexOfRange(Object o, int start, int end) {
+    int indexOfRange(T o, int start, int end) {
         Object[] es = elements;
         if (o == null) {
             for (int i = start; i < end; i++) {
@@ -93,6 +98,11 @@ public class MyArrayList<T> implements MyList<T>{
                 return (T) elements[counter++];
             }
         };
+    }
+
+    public void removeLast(){
+        elements[size - 1] = null;
+        size--;
     }
 
     private void grow(int minCapacity) {
