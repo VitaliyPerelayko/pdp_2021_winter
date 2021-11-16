@@ -53,7 +53,7 @@ public class HashTable<K, V> {
             hash1 %= capacity;
             counter++;
         }
-        System.out.println("INDEX" + hash1);
+        System.out.println("INDEX " + hash1);
         return  (table[hash1] != null && counter < capacity) ? hash1 : -1;
     }
 
