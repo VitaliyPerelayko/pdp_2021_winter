@@ -1,0 +1,27 @@
+GeneralTree.Node root = new GeneralTree.Node(new GeneralTree.Entry('1', 'one'));
+root.addChild(new GeneralTree.Entry('2', 'two'));
+root.addChild(new GeneralTree.Entry('3', 'three'));
+
+GeneralTree.Node root_in1 = new GeneralTree.Node(new GeneralTree.Entry('4', 'four'));
+root_in1.addChild(new GeneralTree.Entry('5', 'five'));
+root_in1.addChild(new GeneralTree.Entry('6', 'six'));
+root.addChild(root_in1);
+
+GeneralTree.Node root_in2 = new GeneralTree.Node(new GeneralTree.Entry('7', 'seven'));
+root_in2.addChild(new GeneralTree.Entry('8', 'eight'));
+root.addChild(root_in2);
+
+GeneralTree.Node root_in1_in1 = new GeneralTree.Node(new GeneralTree.Entry('9', 'nine'));
+root_in1_in1.addChild(new GeneralTree.Entry('10', 'ten'));
+root_in1_in1.addChild(new GeneralTree.Entry('11', 'eleven'));
+root_in1_in1.addChild(new GeneralTree.Entry('12', 'twelve'));
+root_in1.addChild(root_in1_in1);
+
+//GeneralTree tree = new GeneralTree(GeneralTree.BFS_ITERATOR);
+GeneralTree tree = new GeneralTree();
+tree.setRoot(root);
+
+Iterator<GeneralTree.Node> treeIterator = tree.iterator();
+while (treeIterator.hasNext()){
+    System.debug(treeIterator.next().getData());
+}
