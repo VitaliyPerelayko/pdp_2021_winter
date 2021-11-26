@@ -1,0 +1,42 @@
+//1. run future method
+//TestService.createAccountCopy();
+//1.1 run queue from future
+//TestService.runQueue();
+//1.2 run batch from future
+//TestService.runBatch();
+//1.3 run schedule from future
+//TestService.scheduleJobs();
+//1.4 run future from future
+//TestService.futureFutureRun();
+//2. run queue
+System.enqueueJob(new TestQueue(AsyncContext.SYNCHRONOUS));
+//2.1 run queue from queue
+System.enqueueJob(new TestQueue(AsyncContext.SYNCHRONOUS, AsyncContext.QUEUEABLE));
+//2.2 run batch from queue
+System.enqueueJob(new TestQueue(AsyncContext.SYNCHRONOUS, AsyncContext.BATCHABLE));
+//2.3 run schedule from queue
+System.enqueueJob(new TestQueue(AsyncContext.SYNCHRONOUS, AsyncContext.SCHEDULABLE));
+//2.4 run future from queue
+System.enqueueJob(new TestQueue(AsyncContext.SYNCHRONOUS, AsyncContext.FUTURE));
+//3. run schedule
+String cron = TestService.createCronExp(Datetime.now().addMinutes(1));
+System.schedule('TestScheduleJob' + cron, cron, new TestSchedulable(AsyncContext.SYNCHRONOUS));
+//3.1 run queue from schedule
+String cron = TestService.createCronExp(Datetime.now().addSeconds(15));
+System.schedule('TestScheduleJob' + cron, cron, new TestSchedulable(AsyncContext.SYNCHRONOUS, AsyncContext.QUEUEABLE));
+//3.2 run batch from schedule
+String cron = TestService.createCronExp(Datetime.now().addSeconds(15));
+System.schedule('TestScheduleJob' + cron, cron, new TestSchedulable(AsyncContext.SYNCHRONOUS, AsyncContext.BATCHABLE));
+//3.3 run schedule from schedule
+String cron = TestService.createCronExp(Datetime.now().addSeconds(15));
+System.schedule('TestScheduleJob' + cron, cron, new TestSchedulable(AsyncContext.SYNCHRONOUS, AsyncContext.SCHEDULABLE));
+//3.4 run future from schedule
+//
+//3. run batch
+//3.01 test finish method throw exception in
+//3.02 test iterableBatch generate huge num of Obj in start()
+//3.1 run queue from batch
+//3.2 run batch from batch
+//3.3 run schedule from batch
+//3.4 run future from batch
+//3.5 run butch on a schedule one time
