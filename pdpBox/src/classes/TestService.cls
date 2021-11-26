@@ -15,12 +15,13 @@ public class TestService {
         Account acc = [SELECT Name, BillingCity FROM Account LIMIT 1];
         acc.Id = null;
         acc.Name += 'Copy';
-        acc.BillingCity += 'Copy';
+        acc.BillingCity = 'Copy';
         insert acc;
     }
 
     @Future
     public static void runQueue(){
+        System.enqueueJob(new TestQueue(AsyncContext.FUTURE));
         System.enqueueJob(new TestQueue(AsyncContext.FUTURE));
     }
 

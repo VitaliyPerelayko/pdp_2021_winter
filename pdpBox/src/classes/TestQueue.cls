@@ -16,13 +16,13 @@ public class TestQueue implements Queueable {
         InternalMessageManager.newInternalMessage(InternalMessageManager.Type.DEBUG, 'TestQueue', context.name(), true);
         if (runNext == AsyncContext.QUEUEABLE) System.enqueueJob(new TestQueue(AsyncContext.QUEUEABLE));
         if (runNext == AsyncContext.BATCHABLE) {
-            Database.executeBatch(new TestIterableBatch(AsyncContext.QUEUEABLE));
-            Database.executeBatch(new TestIterableBatch(AsyncContext.QUEUEABLE));
+            for (Integer i = 0; i < 101; i++) {
+                Database.executeBatch(new TestIterableBatch(AsyncContext.QUEUEABLE));
+            }
         }
         if (runNext == AsyncContext.SCHEDULABLE) {
             for (Integer i = 1; i < 10; i++){
                 String cron = TestService.createCronExp(Datetime.now().addMinutes(i));
-                InternalMessageManager.newInternalMessage(InternalMessageManager.Type.DEBUG, 'TestQueue', cron, true);
                 System.schedule('TestScheduleJob' + cron, cron, new TestSchedulable(AsyncContext.QUEUEABLE));
             }
         }

@@ -27,13 +27,12 @@ public class TestSchedulable implements Schedulable{
         if (runNext == AsyncContext.SCHEDULABLE) {
             for (Integer i = 1; i < 52; i++){
                 String cron = TestService.createCronExp(Datetime.now().addMinutes(i));
-                InternalMessageManager.newInternalMessage(InternalMessageManager.Type.DEBUG, 'TestQueue', cron, true);
                 System.schedule('TestScheduleJob' + cron, cron, new TestSchedulable(AsyncContext.SCHEDULABLE));
             }
         }
         if (runNext == AsyncContext.FUTURE) {
-            for (Integer i = 0; i < 51; i++) {
-                TestService.runFuture(AsyncContext.QUEUEABLE.name());
+            for (Integer i = 0; i < 2; i++) {
+                TestService.runFuture(AsyncContext.SCHEDULABLE.name());
             }
         }
     }

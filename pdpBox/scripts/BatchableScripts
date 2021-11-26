@@ -1,0 +1,8 @@
+//future from start
+Database.executeBatch(new TestQueryLocatorBatch(AsyncContext.SYNCHRONOUS, AsyncContext.FUTURE, 'start,execute,finish'));
+//queue from batch start
+Database.executeBatch(new TestQueryLocatorBatch(AsyncContext.SYNCHRONOUS, AsyncContext.QUEUEABLE, 'start;execute;finish'));
+//batchable from batch start
+Database.executeBatch(new TestQueryLocatorBatch(AsyncContext.SYNCHRONOUS, AsyncContext.BATCHABLE, 'finish'));
+//schedule from batch
+Database.executeBatch(new TestQueryLocatorBatch(AsyncContext.SYNCHRONOUS, AsyncContext.SCHEDULABLE, 'finish'));
