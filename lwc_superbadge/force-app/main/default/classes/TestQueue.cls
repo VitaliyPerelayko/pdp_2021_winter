@@ -4,12 +4,11 @@ public class TestQueue implements Queueable {
     private Set<AsyncContext> runNext;
 
     public TestQueue(AsyncContext context){
-        this(context, null);
+        this(context, new Set<AsyncContext>());
     }
 
     public TestQueue(AsyncContext context, AsyncContext runNext) {
-        this.context = context;
-        this.runNext = new Set<AsyncContext>{runNext};
+        this(context, new Set<AsyncContext>{runNext});
     }
 
     public TestQueue(AsyncContext context, Set<AsyncContext> runNext) {
