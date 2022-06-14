@@ -6,10 +6,39 @@
             <h1 class="slds-truncate slds-text-heading_medium">{boat.Name}</h1>
             <h2 class="slds-truncate slds-text-heading_small">{boat.Contact__r.Name}</h2>
             <div class="slds-text-body_small">
-                Price: <lightning-formatted-number value={boat.Price__c} maximum-fraction-digits="2"></lightning-formatted-number>
+                Price:
+                <lightning-formatted-number value={boat.Price__c}
+                                            maximum-fraction-digits="2"></lightning-formatted-number>
             </div>
             <div class="slds-text-body_small">Length: {boat.Length__c}</div>
             <div class="slds-text-body_small">Type: {boat.BoatType__r.Name}</div>
         </div>
+    </div>
+    <div>
+        <!--  iterator with change handler  -->
+        <br/>
+        <p>FOREACH</p>
+        <ul title='my test list'>
+            <template for:each={testList} for:item="entry">
+                <li key={entry.key}>
+                    <label for={entry.key}>
+                        <input type="checkbox" id={entry.key} onchange={handleForCheckbox}>
+                        {entry.value}
+                    </label>
+                </li>
+            </template>
+        </ul>
+        <br/>
+        <p>ITERATOR</p>
+        <ul title='my test list'>
+            <template iterator:it={testList} >
+                <li key={it.value.key}>
+                    <label for={it.value.key}>
+                        <input type="checkbox" id={it.value.key} onchange={handleForCheckbox}>
+                        {it.value.value}
+                    </label>
+                </li>
+            </template>
+        </ul>
     </div>
 </template>
